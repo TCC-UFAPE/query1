@@ -6,7 +6,7 @@ from firebase_admin import credentials, firestore
 
 url_metadados = "https://drive.google.com/uc?export=download&id=19cJ7avNtsziaYkrrYuW7FeFdvgrxoNLc"
 
-cred = credentials.Certificate("C:\\Users\\jose.filho.ext\\Desktop\\tcc-ufape-jose-daniel-firebase-adminsdk-fbsvc-ae66b7718d.json")
+cred = credentials.Certificate("tcc-ufape-jose-daniel-firebase-adminsdk-fbsvc-ae66b7718d.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
@@ -36,7 +36,7 @@ if 'project' in metadados.columns:
     contagem_commits_df.to_csv('quantidade_commits.csv', index=False, sep=',', encoding='utf-8')
 
     for _, linha in contagem_commits_df.iterrows():
-        projeto_ref = db.collection('commits-vunerabilidades-diversevul').document() 
+        projeto_ref = db.collection('commits-vunerabilidades-diversevul-2').document() 
         projeto_ref.set({
             'Projeto': linha['Projeto'],
             'Numero de Commits': linha['Numero de Commits']
