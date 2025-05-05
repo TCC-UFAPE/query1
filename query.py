@@ -27,6 +27,8 @@ for i, linha in enumerate(dados_brutos):
 
 metadados = pd.DataFrame(dados_processados)
 
+metadados.to_csv('dados_completos.csv', index=False, sep=',', encoding='utf-8')
+
 if 'project' in metadados.columns:
     contagem_commits = metadados['project'].value_counts()
 
@@ -41,6 +43,10 @@ if 'project' in metadados.columns:
             'Projeto': linha['Projeto'],
             'Numero de Commits': linha['Numero de Commits']
         })
+    
+    for _, linha in metadados.iterrows():
+        metadados_ref = db.collection('base-dados-diversevul').document()
+        metadados_ref.set(linha.to_dict())
 
     print("Dados enviados para o Firestore com sucesso!")
 
